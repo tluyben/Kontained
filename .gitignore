@@ -1,0 +1,44 @@
+# Node
+node_modules/
+build/
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Assets (keep dummy.txt for go:embed)
+assets/*
+!assets/dummy.txt
+
+# Binaries
+binaries/
+
+# SQLite DBs
+*.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+.env
+.env.* 

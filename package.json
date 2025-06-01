@@ -1,0 +1,20 @@
+{
+  "name": "portable-dev-env",
+  "version": "1.0.0",
+  "description": "Portable development environment for React applications",
+  "main": "importer.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node importer.ts"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7",
+    "sqlite": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@types/sqlite3": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+} 
