@@ -92,7 +92,7 @@ import-project: validate-project ## Import project to SQLite
 
 bundle-deps: import-project ## Bundle dependencies
 	@echo "$(BLUE)📦 Bundling dependencies...$(NC)"
-	node ./build/bundled-dev-server.js bundle "$(PROJECT_PATH)" "$(BUILD_DIR)/project.db"
+	node ./build/bundled-dev-server.ts bundle "$(PROJECT_PATH)" "$(BUILD_DIR)/project.db"
 	@echo "$(GREEN)✅ Dependencies bundled$(NC)"
 
 download-node: ## Download Node.js binaries for all platforms
@@ -163,7 +163,7 @@ prepare-go: bundle-deps download-node ## Prepare Go build environment
 	@echo "$(BLUE)🔧 Preparing Go build environment...$(NC)"
 	
 	# Copy dev server
-	cp ./build/bundled-dev-server.js $(BUILD_DIR)/dev-server.js
+	cp ./build/bundled-dev-server.ts $(BUILD_DIR)/dev-server.ts
 	
 	# Create go.mod
 	@echo "module $(PROJECT_NAME)" > $(BUILD_DIR)/go.mod

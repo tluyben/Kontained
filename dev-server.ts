@@ -1,23 +1,23 @@
-const express = require('express');
-const { createServer } = require('vite');
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const fs = require('fs');
-const { execSync } = require('child_process');
+import express, { Request, Response } from 'express';
+import { createServer, ViteDevServer } from 'vite';
+import sqlite3 from 'sqlite3';
+import path from 'path';
+import fs from 'fs';
+import { execSync } from 'child_process';
 
 // Command line arguments
-const dbPath = process.argv[2];
-const port = process.argv[3] || 3000;
+const dbPath: string = process.argv[2];
+const port: number = parseInt(process.argv[3] || '3000', 10);
 
 // Initialize SQLite database
-const db = new sqlite3.Database(dbPath);
+const db: sqlite3.Database = new sqlite3.Database(dbPath);
 
 // Create Express app
-const app = express();
+const app: express.Application = express();
 
 // Create Vite dev server
-async function createViteServer() {
-  const vite = await createServer({
+async function createViteServer(): Promise<void> {
+  const vite: ViteDevServer = await createServer({
     server: {
       middlewareMode: true,
       hmr: {
@@ -35,10 +35,10 @@ async function createViteServer() {
   app.use(vite.middlewares);
 
   // Handle all other routes
-  app.use('*', async (req, res) => {
+  app.use('*', async (req: Request, res: Response) => {
     try {
       // Read index.html
-      let template = fs.readFileSync(
+      let template: string = fs.readFileSync(
         path.resolve(process.cwd(), 'index.html'),
         'utf-8'
       );
@@ -48,7 +48,7 @@ async function createViteServer() {
 
       // Send the transformed HTML
       res.status(200).set({ 'Content-Type': 'text/html' }).end(template);
-    } catch (e) {
+    } catch (e: any) {
       vite.ssrFixStacktrace(e);
       console.error(e);
       res.status(500).end(e.message);
@@ -57,7 +57,7 @@ async function createViteServer() {
 }
 
 // Start the server
-async function startServer() {
+async function startServer(): Promise<void> {
   try {
     await createViteServer();
     

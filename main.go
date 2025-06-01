@@ -37,7 +37,7 @@ var nodeBinaries embed.FS
 
 // Embedded dev server and dependencies
 //
-//go:embed dev-server.js
+//go:embed dev-server.ts
 //go:embed node_modules.tar.gz
 //go:embed project.db
 var projectFiles embed.FS
@@ -275,12 +275,12 @@ func (env *DevEnvironment) extractNodeModules() error {
 func (env *DevEnvironment) extractDevServer() error {
 	fmt.Println("🖥️  Extracting dev server...")
 
-	serverData, err := projectFiles.ReadFile("dev-server.js")
+	serverData, err := projectFiles.ReadFile("dev-server.ts")
 	if err != nil {
 		return fmt.Errorf("failed to read embedded dev server: %v", err)
 	}
 
-	env.serverPath = filepath.Join(env.tempDir, "dev-server.js")
+	env.serverPath = filepath.Join(env.tempDir, "dev-server.ts")
 	if err := os.WriteFile(env.serverPath, serverData, 0644); err != nil {
 		return fmt.Errorf("failed to write dev server: %v", err)
 	}
